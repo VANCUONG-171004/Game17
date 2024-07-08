@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d17987ff4c243343a5fa367116e506e, type: 3}
+  m_Name: ItemHealth
+  m_EditorClassIdentifier: 
+  ID: Health
+  title: Health
+  Icon: {fileID: 21300000, guid: f9b4e4c833ec4784ea3cc749961fec87, type: 3}
+  Description: hoi mau
+  IsTieuThu: 1
+  IsMax: 1
+  soluongMax: 50
+  soluonghientai: 0
+  luongMauHoi: 10
