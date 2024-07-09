@@ -72,13 +72,24 @@ public class Player : MonoBehaviour
         {
             // Lấy hướng nhắm bắn từ vị trí của chuột
             shootDirection = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position)).normalized;
+
+            if (shootDirection.x < 0 && fasingDir == 1)
+            {
+                return;
+            }
+            else if (shootDirection.x > 0 && fasingDir == -1)
+            {
+                return;                
+            }
+
             GameObject news = Instantiate(bulletPrefab, localtransform.position, transform.rotation);
 
             news.GetComponent<Rigidbody2D>().velocity = shootDirection * 20;
 
+            
             // Tính toán góc xoay và xoay player
-            float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            // float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+            // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
 
