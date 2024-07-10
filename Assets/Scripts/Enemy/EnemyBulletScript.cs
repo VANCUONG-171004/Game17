@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBulletScript : MonoBehaviour
@@ -20,9 +21,12 @@ public class EnemyBulletScript : MonoBehaviour
         transform.rotation = Quaternion.Euler(0,0, rot + 90);   
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other) 
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            Heath.Intance.TakeDame(Random.Range(5,10));
+        }    
     }
 }

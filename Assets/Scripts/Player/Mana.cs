@@ -41,11 +41,16 @@ public class Mana : MonoBehaviour
         {
             return;
         }
+        if (mana < manabitru)
+        {
+            return;
+        }
         if (mana > 0)
         {
             mana -= manabitru;
             CapNhatMana(mana,manamax);
         }
+        
     }
 
     public void TuDongHoiMana()

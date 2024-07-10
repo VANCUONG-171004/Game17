@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyUFO : MonoBehaviour
+public class EnemyUFO : Enemy
 {
-    [SerializeField] private GameObject floatingTextPrefab;
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform bulletsPos;
-    [SerializeField] private Slider health;
     
+    [SerializeField] private float Sice;
+    private Transform player;
 
-    public Color fullHealthColor = Color.green;
-    public Color lowHealthColor = Color.yellow;
-    public Color menimumHealthColor = Color.red;
+    
 
     private float timer;
     void Start()
@@ -21,11 +19,13 @@ public class EnemyUFO : MonoBehaviour
         health.maxValue = 100;
         health.value = health.maxValue;
         health.fillRect.GetComponent<Image>().color = fullHealthColor;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     
     void Update()
     {
+        
         timer += Time.deltaTime;
         if (timer > 2)
         {
@@ -41,7 +41,12 @@ public class EnemyUFO : MonoBehaviour
 
     public void Shoot()
     {
-        Instantiate(bullet, bulletsPos.position, Quaternion.identity);
+        float Distance = Vector2.Distance(player.position, transform.position);
+        if (Distance < Sice)
+        {
+            Instantiate(bullet, bulletsPos.position, Quaternion.identity);
+        }
+        
     }
 
     public void TakeDame(int dame)
@@ -55,32 +60,10 @@ public class EnemyUFO : MonoBehaviour
         UpdateHealthColor();
     }
 
-    public void ShowDamage(string text)
+
+    private void OnDrawGizmosSelected() 
     {
-        if (floatingTextPrefab)
-        {
-            GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
-            prefab.GetComponentInChildren<TextMesh>().text = text;
-
-            Destroy(prefab, 1f);
-        }
-    }
-
-    void UpdateHealthColor()
-    {
-        float healthPercentage = health.value / health.maxValue;
-
-        if (healthPercentage <= 0.3f) // Dưới 30%
-        {
-            health.fillRect.GetComponent<Image>().color = menimumHealthColor;
-        }
-        else if (healthPercentage <= 0.7f) // Dưới 70%
-        {
-            health.fillRect.GetComponent<Image>().color = lowHealthColor;
-        }
-        else // Trên 70%
-        {
-            health.fillRect.GetComponent<Image>().color = fullHealthColor;
-        }
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position,Sice);    
     }
 }

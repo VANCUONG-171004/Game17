@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Heath : MonoBehaviour
 {
+    public static Heath Intance;
     [SerializeField] private float currtenheath;
     [SerializeField] private float maxheath;
 
     public float Mau {get; private set;}
 
+    private void Awake() 
+    {
+        Intance = this;    
+    }
     void Start()
     {
         Mau = currtenheath;

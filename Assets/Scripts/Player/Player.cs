@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
 
     public GameObject bulletPrefab;
     public Transform localtransform;
+    private Mana manas;
 
     public float rotationSpeed = 180f; // Tốc độ quay của player
 
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        manas = GetComponent<Mana>();
     }
     void Start()
     {
@@ -82,9 +84,15 @@ public class Player : MonoBehaviour
                 return;                
             }
 
-            GameObject news = Instantiate(bulletPrefab, localtransform.position, transform.rotation);
-
-            news.GetComponent<Rigidbody2D>().velocity = shootDirection * 20;
+            
+            if (manas.mana >= 5)
+            {
+                manas.TakeMana(5);
+                GameObject news = Instantiate(bulletPrefab, localtransform.position, transform.rotation);
+            
+                news.GetComponent<Rigidbody2D>().velocity = shootDirection * 20;
+            }
+            
 
             
             // Tính toán góc xoay và xoay player
