@@ -20,6 +20,12 @@ public class ItemSlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI soluongTMP;
 
     public int Index {get; set;}
+    private Button _button;
+
+    private void Awake() 
+    {
+        _button = GetComponent<Button>();    
+    }
 
     public void CapNhatSlot(IventoryItem item, int soluong)
     {
@@ -36,5 +42,17 @@ public class ItemSlot : MonoBehaviour
     public void ClickSlot()
     {
         EventSlot?.Invoke(Seledted.Click, Index);
+    }
+
+    public void SlotUseItem()
+    {
+        if (Inventory.Intance.IventoryItems[Index] != null)
+        {
+            EventSlot?.Invoke(Seledted.Use,Index);
+        }
+    }
+    public void SlectionSlot()
+    {
+        _button.Select();
     }
 }

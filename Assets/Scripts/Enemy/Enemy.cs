@@ -3,16 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class Enemy : MonoBehaviour
 {
+    public static Enemy Intance;
     [SerializeField] protected GameObject floatingTextPrefab;
     [SerializeField] protected Slider health;
-
+    [SerializeField] protected GameObject HeathPrefab;
+    [SerializeField] protected GameObject ManaPrefab;
+    [SerializeField] protected GameObject coinPrefab;
 
     protected  Color fullHealthColor = Color.green;
     protected Color lowHealthColor = Color.yellow;
     protected Color menimumHealthColor = Color.red;
 
+
+
+    private void Awake() 
+    {
+        Intance = this;    
+    }
     public virtual void UpdateHealthColor()
     {
         float healthPercentage = health.value / health.maxValue;
@@ -31,6 +41,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public virtual void TakeDame(int dame)
+    {
+        ShowDamage(dame.ToString());
+        if (dame < 0)
+        {
+            return;
+        }
+        health.value -= dame;
+        if (health.value <= 0)
+        {
+            Destroy(gameObject);
+            SinhRaVatPham();
+        }
+        UpdateHealthColor();
+    }
     public virtual void ShowDamage(string text)
     {
         if (floatingTextPrefab)
@@ -39,6 +64,24 @@ public class Enemy : MonoBehaviour
             prefab.GetComponentInChildren<TextMesh>().text = text;
 
             Destroy(prefab, 1f);
+        }
+    }
+
+    public virtual void SinhRaVatPham()
+    {
+        float random = Random.Range(1,4);
+        switch (random)
+        {
+            case 1: 
+            break;
+            case 2: 
+            Instantiate(HeathPrefab, transform.position, Quaternion.identity);
+            Instantiate(coinPrefab, transform.position, Quaternion.identity);
+            break;
+            case 3: 
+            Instantiate(HeathPrefab, transform.position, Quaternion.identity);
+            break;
+            
         }
     }
 }

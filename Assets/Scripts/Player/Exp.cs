@@ -6,12 +6,16 @@ using UnityEngine;
 
 public class Exp : MonoBehaviour
 {
+    public static Exp Intance;
     [SerializeField] private Statf statf;
     [SerializeField] private int capdoMax;
     [SerializeField] private int expCanDat; //Số kinh nghiệm cần để đạt cấp độ 1.
     [SerializeField] private int HeSoTangTruong;
 
-    
+    private void Awake() 
+    {
+        Intance = this;    
+    }
     void Start()
     {
         

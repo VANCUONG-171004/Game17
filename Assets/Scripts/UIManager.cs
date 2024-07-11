@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Statf statf;
     [Header("Panel")]
     [SerializeField] private GameObject panelInventory;
+    [SerializeField] private GameObject panelStatf;
     [Header("Heath")]
     [SerializeField] private Image heathImage;
     [SerializeField] private Image manaImage;
@@ -22,6 +23,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI manaTMP;
     [SerializeField] private TextMeshProUGUI expTMP;
     [SerializeField] private TextMeshProUGUI levelTMP;
+
+    [Header("Panel Statf")]
+    [SerializeField] private TextMeshProUGUI capdoTMP_DES;
+    [SerializeField] private TextMeshProUGUI healthTMP_DES;
+    [SerializeField] private TextMeshProUGUI manaTMP_DES;
+    [SerializeField] private TextMeshProUGUI damageTMP_DES;
+    [SerializeField] private TextMeshProUGUI VelocityTMP_DES;
 
     private float currtenheath;
     private float maxheath;
@@ -44,6 +52,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         DoDulieu();
+        PanelStatf();
     }
 
 
@@ -58,6 +67,19 @@ public class UIManager : MonoBehaviour
         manaTMP.text = $"{currtenmana}/{maxmana}";
         expTMP.text = $"{((expcurrten/ expmax) * 100):F2}%";
         levelTMP.text = $"{statf.CapDo}";
+    }
+
+    public void PanelStatf()
+    {
+        if (panelStatf.activeSelf == false)
+        {
+            return;
+        }
+        capdoTMP_DES.text = statf.CapDo.ToString();
+        healthTMP_DES.text = statf.maxheath.ToString();
+        manaTMP_DES.text = statf.manamax.ToString();
+        VelocityTMP_DES.text = statf.velocity.ToString();
+        damageTMP_DES.text = $"{statf.minDamage} - {statf.maxDamage}";
     }
 
     public void CapNhatLuongMau(float mauhientai, float mautoida)
@@ -79,5 +101,9 @@ public class UIManager : MonoBehaviour
     public void showPanelInventory()
     {
         panelInventory.SetActive(!panelInventory.activeSelf);
+    }
+    public void ShowPanelStatf()
+    {
+        panelStatf.SetActive(!panelStatf.activeSelf);
     }
 }

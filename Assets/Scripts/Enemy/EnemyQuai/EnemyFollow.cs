@@ -28,41 +28,31 @@ public class EnemyFollow : Enemy
     void Update()
     {
         timer += Time.deltaTime;
-        
+
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
         if (distanceFromPlayer < lineOfSize && distanceFromPlayer > shootingRange)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position , player.position, Speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position, player.position, Speed * Time.deltaTime);
             FacePlayer();
         }
         else if (distanceFromPlayer <= shootingRange && timer > 2)
         {
             timer = 0;
-            Instantiate(bulletPrefab,bulletPos.transform.position,Quaternion.identity);
+            Instantiate(bulletPrefab, bulletPos.transform.position, Quaternion.identity);
         }
 
-        if(Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            TakeDame(Random.Range(5,10));
+            TakeDame(Random.Range(5, 10));
         }
     }
 
-    public void TakeDame(int dame)
-    {
-        ShowDamage(dame.ToString());
-        if (dame < 0)
-        {
-            return;
-        }
-        health.value -= dame;
-        UpdateHealthColor();
-    }
 
-    private void OnDrawGizmosSelected() 
+    private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;  
+        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, lineOfSize);
-         Gizmos.DrawWireSphere(transform.position, shootingRange);   
+        Gizmos.DrawWireSphere(transform.position, shootingRange);
     }
 
     private void FacePlayer()
@@ -72,12 +62,12 @@ public class EnemyFollow : Enemy
         {
             Flip();
         }
-            
+
         else if (player.position.x < transform.position.x && !FashingRight)
         {
             Flip();
         }
-            
+
     }
     public void Flip()
     {
@@ -91,5 +81,17 @@ public class EnemyFollow : Enemy
             Flip();
         else if (x < 0 && FashingRight)
             Flip();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            bullet bullets = other.GetComponent<bullet>();
+            Exp.Intance.ThangCap(Random.Range(10,15));
+            TakeDame(bullets.Damage);
+            Destroy(other.gameObject);
+        }
+
     }
 }

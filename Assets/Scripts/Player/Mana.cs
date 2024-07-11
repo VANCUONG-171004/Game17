@@ -5,8 +5,7 @@ using UnityEngine.UIElements;
 
 public class Mana : MonoBehaviour
 {
-    [SerializeField] private float currtenmana;
-    [SerializeField] private float manamax;
+    [SerializeField] private Statf statf;
     [SerializeField] private float manahoi;
 
 
@@ -20,8 +19,8 @@ public class Mana : MonoBehaviour
     }
     void Start()
     {
-        mana = currtenmana;
-        CapNhatMana(mana,manamax);
+        mana = statf.currtenmana;
+        CapNhatMana(mana,statf.manamax);
 
         InvokeRepeating(nameof(TuDongHoiMana),1,1); 
     }
@@ -48,17 +47,17 @@ public class Mana : MonoBehaviour
         if (mana > 0)
         {
             mana -= manabitru;
-            CapNhatMana(mana,manamax);
+            CapNhatMana(mana,statf.manamax);
         }
         
     }
 
     public void TuDongHoiMana()
     {
-        if (heath.Mau > 0 && mana < manamax)
+        if (heath.Mau > 0 && mana < statf.manamax)
         {
             mana += manahoi;
-            CapNhatMana(mana,manamax);
+            CapNhatMana(mana,statf.manamax);
         }
     }
 

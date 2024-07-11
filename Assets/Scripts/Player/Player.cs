@@ -154,7 +154,7 @@ public class Player : MonoBehaviour
     // Kĩ Năng Dash
     public void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.L) && _dashTime <= 0 && IsDashing == false)
+        if (Input.GetKeyDown(KeyCode.Space) && _dashTime <= 0 && IsDashing == false)
         {
             MoveSpeed += DashSpeed;
             _dashTime = DashTime;

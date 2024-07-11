@@ -21,6 +21,8 @@ public class BulletFolowPlayer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Heath heath = other.GetComponent<Heath>();
+            heath.TakeDame(Random.Range(15,25));
             Destroy(gameObject);
         }    
     }

@@ -101,4 +101,54 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    private void ElimItem(int index)
+    {
+        IventoryItems[index].soluonghientai--;
+        if (iventoryItems[index].soluonghientai <= 0)
+        {
+            iventoryItems[index].soluonghientai = 0;
+            iventoryItems[index] = null;
+            IventoryUI.Intance.HienThiItemIventory(null,0,index);
+
+        }
+        else
+        {
+           IventoryUI.Intance.HienThiItemIventory(iventoryItems[index],iventoryItems[index].soluonghientai,index);
+        }
+    }
+
+    public void UseItem(int index)
+    {
+        if (iventoryItems[index] == null)
+        {
+            return;
+        }
+        if (iventoryItems[index].UseItem())
+        {
+            ElimItem(index);
+        }
+    }
+
+    private void SlotInterrationResdata(Seledted seledted, int Index)
+    {
+        switch (seledted)
+        {
+            case Seledted.Use:
+                UseItem(Index);
+                break;
+            case Seledted.Equira:
+                break;
+            case Seledted.Remover:
+                break;
+        }
+    }
+
+    private void OnEnable() 
+    {
+        ItemSlot.EventSlot += SlotInterrationResdata;    
+    }
+    private void OnDisable() 
+    {
+        ItemSlot.EventSlot -= SlotInterrationResdata;   
+    }
 }

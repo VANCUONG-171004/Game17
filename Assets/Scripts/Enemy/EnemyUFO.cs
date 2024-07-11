@@ -7,11 +7,9 @@ public class EnemyUFO : Enemy
 {
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform bulletsPos;
-    
+
     [SerializeField] private float Sice;
     private Transform player;
-
-    
 
     private float timer;
     void Start()
@@ -20,17 +18,18 @@ public class EnemyUFO : Enemy
         health.value = health.maxValue;
         health.fillRect.GetComponent<Image>().color = fullHealthColor;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
     }
 
-    
+
     void Update()
     {
-        
+
         timer += Time.deltaTime;
         if (timer > 2)
         {
             timer = 0;
-            Shoot();            
+            Shoot();
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -46,24 +45,27 @@ public class EnemyUFO : Enemy
         {
             Instantiate(bullet, bulletsPos.position, Quaternion.identity);
         }
-        
-    }
 
-    public void TakeDame(int dame)
-    {
-        ShowDamage(dame.ToString());
-        if (dame < 0)
-        {
-            return;
-        }
-        health.value -= dame;
-        UpdateHealthColor();
     }
 
 
-    private void OnDrawGizmosSelected() 
+
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position,Sice);    
+        Gizmos.DrawWireSphere(transform.position, Sice);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            
+            bullet bullets = other.GetComponent<bullet>();
+            Exp.Intance.ThangCap(Random.Range(5,10));
+            TakeDame(bullets.Damage);
+            Destroy(other.gameObject);
+        }
+
     }
 }

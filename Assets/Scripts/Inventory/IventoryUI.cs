@@ -106,4 +106,13 @@ public class IventoryUI : MonoBehaviour
     {
         ItemSlot.EventSlot -= TuongTacSuKienClick;    
     }
+
+    public void UseItem()
+    {
+        if (slotSeccion != null)
+        {
+            slotSeccion.SlotUseItem();
+            slotSeccion.SlectionSlot();
+        }
+    }
 }
