@@ -5,16 +5,18 @@ using UnityEngine.UIElements;
 
 public class Mana : MonoBehaviour
 {
+    public static Mana Intance;
     [SerializeField] private Statf statf;
     [SerializeField] private float manahoi;
 
-
+    public bool Dieukien => mana < statf.manamax;
     private Heath heath;
 
     public float mana {get; private set;}
 
     private void Awake() 
     {
+        Intance = this;
         heath = GetComponent<Heath>();    
     }
     void Start()
@@ -47,6 +49,27 @@ public class Mana : MonoBehaviour
         if (mana > 0)
         {
             mana -= manabitru;
+            CapNhatMana(mana,statf.manamax);
+        }
+        
+    }
+    public void HoiMana(float manadchoi)
+    {
+        if (manadchoi<0)
+        {
+            return;
+        }
+        if (mana < manadchoi)
+        {
+            return;
+        }else if (mana >= statf.manamax)
+        {
+            mana = statf.manamax;
+            CapNhatMana(mana,statf.manamax);
+        }
+        if (mana > 0)
+        {
+            mana += manadchoi;
             CapNhatMana(mana,statf.manamax);
         }
         

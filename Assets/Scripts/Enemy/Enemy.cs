@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,11 +18,16 @@ public class Enemy : MonoBehaviour
     protected Color lowHealthColor = Color.yellow;
     protected Color menimumHealthColor = Color.red;
 
+    public EntityFX entityFX;
 
 
     private void Awake() 
     {
         Intance = this;    
+    }
+    private void Start()
+    {
+        entityFX = GetComponent<EntityFX>();    
     }
     public virtual void UpdateHealthColor()
     {
@@ -43,6 +49,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void TakeDame(int dame)
     {
+        // entityFX.StartCoroutine("FlashFX");
         ShowDamage(dame.ToString());
         if (dame < 0)
         {
@@ -51,7 +58,8 @@ public class Enemy : MonoBehaviour
         health.value -= dame;
         if (health.value <= 0)
         {
-            Destroy(gameObject);
+            health.value = 100;
+            gameObject.SetActive(false);
             SinhRaVatPham();
         }
         UpdateHealthColor();
