@@ -88,8 +88,9 @@ public class EnemyFollow : Enemy
         if (other.CompareTag("Bullet"))
         {
             bullet bullets = other.GetComponent<bullet>();
-            Exp.Intance.ThangCap(Random.Range(10,15));
+            Exp.Intance.ThangCap(Random.Range(5,10));
             TakeDame(bullets.Damage);
+            PlayHitEffect();
             Destroy(other.gameObject);
         }
 

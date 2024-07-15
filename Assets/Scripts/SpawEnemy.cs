@@ -21,7 +21,12 @@ public class SpawEnemy : MonoBehaviour
         GameObject enemy = ObjectPool.Intance.GetPoolObject();
         if (enemy != null)
         {
-            enemy.transform.position = this.transform.position;
+            Vector3 randowPosition = new Vector3(
+              Random.Range(-90,-35),
+              Random.Range(-22,18),
+              0  
+            );
+            enemy.transform.position = randowPosition;
             enemy.SetActive(true);
         }
     }

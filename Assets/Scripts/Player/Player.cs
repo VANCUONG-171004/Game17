@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     public Transform localtransform;
     private Mana manas;
 
+    public ParticleSystem particlesSystem;
+    private bool isMoving = false;
+
     public float rotationSpeed = 180f; // Tốc độ quay của player
 
     private Vector3 shootDirection;
@@ -49,7 +52,7 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-
+        particlesSystem.Stop();
     }
 
     void Update()
@@ -68,6 +71,25 @@ public class Player : MonoBehaviour
 
         anim.SetBool("Attack", isAttacking);
         anim.SetInteger("combocounter", combocounter);
+
+
+        // Kiểm tra trạng thái di chuyển của nhân vật
+    if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+    {
+        if (!isMoving)
+        {
+            isMoving = true;
+            particlesSystem.Play();
+        }
+    }
+    else
+    {
+        if (isMoving)
+        {
+            isMoving = false;
+            particlesSystem.Stop();
+        }
+    }
 
         // Kiểm tra xem người chơi có nhấn bắn không
         if (Input.GetKeyDown(KeyCode.Mouse1))

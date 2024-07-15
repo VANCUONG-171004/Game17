@@ -179,6 +179,7 @@ MonoBehaviour:
   HeathPrefab: {fileID: 8122950036812353629, guid: 4f7ddcd80c54772419b9f6aca3471ab1, type: 3}
   ManaPrefab: {fileID: 8717365733214279958, guid: 4273e9bd4dd72ea4d8344de80e98746b, type: 3}
   coinPrefab: {fileID: 1482572595180380152, guid: 05b905d04081b35498c2e3c03a0572b4, type: 3}
+  hiteffect: {fileID: 1475154091778333994, guid: cb87581295436a948ae55765d54900f2, type: 3}
   entityFX: {fileID: 4808786054333267114}
   fasingDir: 1
   Speed: 5

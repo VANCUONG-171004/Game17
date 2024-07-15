@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc3c200420835c41bfa4f014bfd25d8, type: 3}
   m_Name: Statf
   m_EditorClassIdentifier: 
-  CapDo: 8
+  CapDo: 7
   expCanDats: 2
   HeSoTangTruong: 2
-  exp: 267
-  exphientai: 11
-  SoKinhNghiemCanDat: 256
+  exp: 148
+  exphientai: 27
+  SoKinhNghiemCanDat: 128
   velocity: 5
-  currtenheath: 200
-  maxheath: 200
-  currtenmana: 100
-  manamax: 100
-  minDamage: 10
-  maxDamage: 30
-  Coin: 138
+  currtenheath: 284
+  maxheath: 289
+  currtenmana: 174
+  manamax: 184
+  minDamage: 30
+  maxDamage: 51
+  Coin: 2141

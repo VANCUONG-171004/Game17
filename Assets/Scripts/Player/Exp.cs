@@ -66,7 +66,7 @@ public class Exp : MonoBehaviour
             statf.CapDo++;
             statf.exphientai = 0f;
             statf.SoKinhNghiemCanDat *= statf.HeSoTangTruong;
-
+            statf.UPLevel();
         }
     }
 

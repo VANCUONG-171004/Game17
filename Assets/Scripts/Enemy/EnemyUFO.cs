@@ -62,8 +62,9 @@ public class EnemyUFO : Enemy
         {
             
             bullet bullets = other.GetComponent<bullet>();
-            Exp.Intance.ThangCap(Random.Range(5,10));
+            Exp.Intance.ThangCap(Random.Range(2,5));
             TakeDame(bullets.Damage);
+            PlayHitEffect();
             Destroy(other.gameObject);
         }
 

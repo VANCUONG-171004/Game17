@@ -27,4 +27,15 @@ public class Statf : ScriptableObject
     public int maxDamage;
     [Header("Coin")]
     public int Coin;
+
+
+    public void UPLevel()
+    {
+        currtenheath += Random.Range(10,20);
+        maxheath += Random.Range(10,20);
+        currtenmana += Random.Range(10,20);
+        manamax += Random.Range(10,20);
+        minDamage += Random.Range(3,5);
+        maxDamage += Random.Range(3,5);
+    }
 }

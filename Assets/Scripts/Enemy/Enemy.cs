@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected GameObject HeathPrefab;
     [SerializeField] protected GameObject ManaPrefab;
     [SerializeField] protected GameObject coinPrefab;
+    [SerializeField] protected ParticleSystem hiteffect;
 
     protected  Color fullHealthColor = Color.green;
     protected Color lowHealthColor = Color.yellow;
@@ -59,6 +60,7 @@ public class Enemy : MonoBehaviour
         if (health.value <= 0)
         {
             health.value = 100;
+            
             gameObject.SetActive(false);
             SinhRaVatPham();
         }
@@ -90,6 +92,15 @@ public class Enemy : MonoBehaviour
             Instantiate(HeathPrefab, transform.position, Quaternion.identity);
             break;
             
+        }
+    }
+
+    public virtual void PlayHitEffect()
+    {
+        if (hiteffect != null)
+        {
+            ParticleSystem intance = Instantiate(hiteffect,transform.position,Quaternion.identity);
+            Destroy(intance.gameObject,1f);
         }
     }
 }
