@@ -74,24 +74,23 @@ public class Player : MonoBehaviour
 
 
         // Kiểm tra trạng thái di chuyển của nhân vật
-    if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-    {
-        if (!isMoving)
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            isMoving = true;
-            particlesSystem.Play();
+            if (!isMoving)
+            {
+                isMoving = true;
+                particlesSystem.Play();
+            }
         }
-    }
-    else
-    {
-        if (isMoving)
+        else
         {
-            isMoving = false;
-            particlesSystem.Stop();
+            if (isMoving)
+            {
+                isMoving = false;
+                particlesSystem.Stop();
+            }
         }
-    }
 
-        // Kiểm tra xem người chơi có nhấn bắn không
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             // Lấy hướng nhắm bắn từ vị trí của chuột
@@ -103,20 +102,20 @@ public class Player : MonoBehaviour
             }
             else if (shootDirection.x > 0 && fasingDir == -1)
             {
-                return;                
+                return;
             }
 
-            
+
             if (manas.mana >= 5)
             {
                 manas.TakeMana(5);
                 GameObject news = Instantiate(bulletPrefab, localtransform.position, transform.rotation);
-            
+
                 news.GetComponent<Rigidbody2D>().velocity = shootDirection * 20;
             }
-            
 
-            
+
+
             // Tính toán góc xoay và xoay player
             // float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
             // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
