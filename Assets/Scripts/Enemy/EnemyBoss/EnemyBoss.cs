@@ -18,7 +18,7 @@ public class EnemyBoss : Enemy
     private Transform player;
     private void Start() 
     {
-        health.maxValue = 2000;
+        health.maxValue = 1000;
         health.value = health.maxValue;
         health.fillRect.GetComponent<Image>().color = fullHealthColor;
         player = GameObject.FindGameObjectWithTag("Player").transform;  

@@ -35,7 +35,7 @@ public class Statf : ScriptableObject
         maxheath += Random.Range(10,20);
         currtenmana += Random.Range(10,20);
         manamax += Random.Range(10,20);
-        minDamage += Random.Range(3,5);
-        maxDamage += Random.Range(3,5);
+        minDamage += Random.Range(1,3);
+        maxDamage += Random.Range(2,4);
     }
 }

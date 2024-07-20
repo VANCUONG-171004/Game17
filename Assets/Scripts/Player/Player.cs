@@ -27,11 +27,6 @@ public class Player : MonoBehaviour
     private float MoveSpeed = 5;
 
 
-    [Header("Attack info")]
-    int combocounter = 0;
-    bool isAttacking = false;
-    float attackCoolDown = 1f;
-    float attacktimer;
 
     public GameObject bulletPrefab;
     public Transform localtransform;
@@ -57,9 +52,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        attacktimer -= Time.deltaTime;
-        attackCoolDown = attacktimer;
-
+        
         MoveInput.x = Input.GetAxisRaw("Horizontal");
         MoveInput.y = Input.GetAxisRaw("Vertical");
         anim.SetFloat("Mover", MoveInput.sqrMagnitude);
@@ -67,10 +60,6 @@ public class Player : MonoBehaviour
         FlipControler(MoveInput.x);
 
         CheckInput();
-
-
-        anim.SetBool("Attack", isAttacking);
-        anim.SetInteger("combocounter", combocounter);
 
 
         // Kiểm tra trạng thái di chuyển của nhân vật
@@ -132,30 +121,7 @@ public class Player : MonoBehaviour
     {
         Dash();
 
-        if (attackCoolDown < 0)
-        {
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                isAttacking = true;
-                combocounter++;
-                attackCoolDown = 1;
-            }
-        }
-
-
-        if (combocounter > 1)
-        {
-            combocounter = 0;
-        }
-
     }
-
-    public void StopAttack()
-    {
-        isAttacking = false;
-
-    }
-
 
     //Quay đầu
     public void Flip()
