@@ -100,7 +100,7 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-
+    //sử lý loại bỏ một mục khỏi kho đồ
     private void ElimItem(int index)
     {
         IventoryItems[index].soluonghientai--;
